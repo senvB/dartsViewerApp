@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DartsViewer</string>
+    <string name="action_settings">Optionen</string>
+    <string name="refresh">Aktualisiere</string>
+    <string name="appVersion">0.11-alpha</string>
+    <string name="website">https://dartsviewer.senv.de</string>
+    <string name="action_info">Info</string>
+    <string name="action_feedback">Feedback</string>
+
+    <string-array name="bundeslaender">
+        <item>Baden-Württemberg</item>
+        <item>Bayern</item>
+        <item>Berlin</item>
+        <item>Brandenburg</item>
+        <item>Bremen</item>
+        <item>Hamburg</item>
+        <item>Hessen</item>
+        <item>Mecklenburg-Vorpommern</item>
+        <item>Niedersachsen</item>
+        <item>Nordrhein-Westfalen</item>
+        <item>Rheinland-Pfalz</item>
+        <item>Saarland</item>
+        <item>Sachsen</item>
+        <item>Sachsen-Anhalt</item>
+        <item>Schleswig-Holstein</item>
+        <item>Thüringen</item>
+    </string-array>
+
+    <string name="country_prompt">Bundesländer</string>
+
+    <string name="textName">Name</string>
+    <string name="textTeam">Team</string>
+    <string name="textRank">Platz</string>
+    <string name="textGamesSets">Spiele\nSätze</string>
+    <string name="textAway">Gast</string>
+    <string name="textRoundNr">Runde/Nr.</string>
+    <string name="textHome">Heim</string>
+    <string name="textDateResult">Datum-Uhrzeit\nSpiele-Sätze</string>
+    <string name="textPoints">Pkt.</string>
+    <string name="textGames">Partien</string>
+
+</resources>

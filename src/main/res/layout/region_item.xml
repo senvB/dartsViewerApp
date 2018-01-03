@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="1dp"
+    android:background="@drawable/rounded_view">
+
+    <TextView
+        android:id="@+id/regionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="name"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/regionManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/regionName"
+        android:padding="5dp"
+        android:text="manager"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/regionHomepage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/regionName"
+        android:padding="5dp"
+        android:text="homepage"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/regionEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/regionHomepage"
+        android:padding="5dp"
+        android:text="email"
+        android:textSize="12sp" />
+</RelativeLayout>

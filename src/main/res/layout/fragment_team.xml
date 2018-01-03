@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.senv.app.darts.dartsviewer.TeamFragment">
+
+    <ScrollView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:fillViewport="true"
+        android:paddingLeft="2dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal|vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/teamTitleHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Team: "
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/teamTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/teamTitleHeader" />
+
+            <CheckBox
+                android:id="@id/favorite"
+                style="?android:attr/starStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+            <TextView
+                android:id="@+id/teamVenueHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamTitleHeader"
+                android:text="Spielort: "
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/teamVenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamTitleHeader"
+                android:layout_toRightOf="@id/teamVenueHeader" />
+
+            <TextView
+                android:id="@+id/teamAddressHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamVenueHeader"
+                android:text="Adresse: "
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/teamAddress1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamVenueHeader"
+                android:layout_toRightOf="@id/teamAddressHeader" />
+
+            <TextView
+                android:id="@+id/teamAddress2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamAddress1"
+                android:layout_toRightOf="@id/teamAddressHeader" />
+
+            <Button
+                android:id="@+id/btnShowAddressInMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:minHeight="0dp"
+                android:minWidth="75dp"
+                android:text="Spielort"
+                android:textSize="14sp"
+                android:layout_below="@+id/teamPhone"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/teamCaptainHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamAddress2"
+                android:text="Kapitän:  "
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/teamCaptain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamAddress2"
+                android:layout_toRightOf="@id/teamCaptainHeader" />
+
+            <TextView
+                android:id="@+id/teamPhoneHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamCaptain"
+                android:text="Telefon:  "
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/teamPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamCaptain"
+                android:layout_toRightOf="@id/teamPhoneHeader" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/btnShowAddressInMap"
+                android:layout_marginTop="3dp"
+                android:background="#ffb6b4b4" />
+
+            <TextView
+                android:id="@+id/teamMatchesHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnShowAddressInMap"
+                android:layout_marginTop="2sp"
+                android:text="Spiele"
+                android:textSize="14sp" />
+
+            <FrameLayout
+                android:id="@+id/frameMatches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamMatchesHeadline">
+
+                <TableLayout
+                    android:id="@+id/teamMatches"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/frameMatches"
+                android:layout_marginTop="4sp"
+                android:background="#ffb6b4b4" />
+
+            <TextView
+                android:id="@+id/teamPlayerHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frameMatches"
+                android:layout_marginTop="2sp"
+                android:text="Spieler"
+                android:textSize="14sp" />
+
+            <TableLayout
+                android:id="@+id/teamPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teamPlayerHeadline"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" />
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

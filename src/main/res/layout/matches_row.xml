@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/roundGame"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/home"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/dash"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/away"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/dateTimeOrGamesSest"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textSize="10sp" />
+</TableRow>

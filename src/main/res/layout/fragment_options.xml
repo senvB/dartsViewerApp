@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Optionen"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/textView1"
+        android:layout_marginBottom="5dp"
+        android:background="#ff000000" />
+
+    <TextView
+        android:id="@+id/cacheHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginBottom="8dp"
+        android:text="Cachegröße:  "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/cacheSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@id/cacheHeader"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnClearCache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/divider"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/rounded_button"
+        android:minHeight="30dp"
+        android:padding="2dp"
+        android:text="Cache löschen"
+        android:textSize="12sp" />
+</RelativeLayout>
