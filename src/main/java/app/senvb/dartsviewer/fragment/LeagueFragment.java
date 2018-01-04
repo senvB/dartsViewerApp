@@ -147,18 +147,21 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
             tableLayout.removeAllViews();
             tableLayout.addView(createHeaderRow());
             for (Team t : leagueData.getTeams().getTeams()) {
-                this.tableLayout.addView(createTeamRow(t));
+                tableLayout.addView(createTeamRow(t));
             }
             Date lastModDate = DataCache.getInstance().getLastUpdateDateForLeagueData(this.leagueInfo.getRegionID(), this.leagueInfo.getSeasonID(), this.leagueInfo.getLeagueID());
             DateFormat dfDate = android.text.format.DateFormat.getDateFormat(getContext());
             DateFormat dfTime = android.text.format.DateFormat.getTimeFormat(getContext());
-            this.lastUpdateField.setText(String.format(Locale.getDefault(), "letztes Update: %s, %s", dfDate.format(lastModDate), dfTime.format(lastModDate)));
-            return;
+            lastUpdateField.setText(String.format(Locale.getDefault(), "letztes Update: %s, %s", dfDate.format(lastModDate), dfTime.format(lastModDate)));
+            if (!ld.hasPlayers()) {
+                Toast.makeText(getActivity(), "Fehler beim Lesen der Spielerdaten. Diese können aktuell nicht angezeigt werden", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            btnMatches.setEnabled(false);
+            btnPlayer.setEnabled(false);
+            favoriteCheck.setEnabled(false);
+            Toast.makeText(getActivity(), "Fehler beim Lesen der Daten. Bitte melden mit Angabe Region, Saison und Liga. Danke", Toast.LENGTH_LONG).show();
         }
-        this.btnMatches.setEnabled(false);
-        this.btnPlayer.setEnabled(false);
-        this.favoriteCheck.setEnabled(false);
-        Toast.makeText(getActivity(), "Fehler beim Lesen der Daten. Bitte melden mit Angabe Region, Saison und Liga. Danke", Toast.LENGTH_LONG).show();
     }
 
     private TableRow createTeamRow(Team t) {
