@@ -89,14 +89,14 @@ public class LeagueDataDownloadTask extends DartsViewerAsyncTask<LeagueMetaData,
     }
 
     protected void onPostExecute(LeagueData league) {
-        this.handler.handleLeagueData(league);
+        handler.handleLeagueData(league);
         taskFinished();
     }
 
     public void update(Step nextStep) {
-        this.stepNumber++;
+        stepNumber++;
         StringBuilder sb = new StringBuilder();
-        sb.append("Lade: (").append(this.stepNumber);
+        sb.append("Lade: (").append(stepNumber);
         sb.append("/").append(Step.getTotalNumberOfSteps()).append("): ");
         sb.append(nextStep.getMessage());
         publishProgress(sb.toString());
