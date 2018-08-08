@@ -4,7 +4,7 @@
     <string name="app_name">DartsViewer</string>
     <string name="action_settings">Optionen</string>
     <string name="refresh">Aktualisiere</string>
-    <string name="appVersion">0.11-alpha</string>
+    <string name="appVersion">0.12</string>
     <string name="website">https://dartsviewer.senv.de</string>
     <string name="action_info">Info</string>
     <string name="action_feedback">Feedback</string>
