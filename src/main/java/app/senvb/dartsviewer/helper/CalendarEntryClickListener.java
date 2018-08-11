@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Optional;
 
 import senvb.lib.dsabLoader.LeagueData;
 import senvb.lib.dsabLoader.Match;
@@ -47,27 +48,37 @@ public final class CalendarEntryClickListener implements View.OnClickListener {
     private String resolveTitleForMatch(Match match) {
         StringBuilder sb = new StringBuilder();
         sb.append("Darts ").append(leagueData.getName()).append(": ");
-        sb.append(leagueData.getTeamByNumber(match.getHome()).get().getName()).append(" - ").append(leagueData.getTeamByNumber(match.getAway()).get().getName());
+        sb.append(resolveTeamName(match.getHome())).append(" - ").append(resolveTeamName(match.getAway()));
         return sb.toString();
     }
 
+    private String resolveTeamName(int id) {
+        Optional<Team> team = leagueData.getTeamByNumber(id);
+        if (team.isPresent()) {
+            return team.get().getName();
+        }
+        return "";
+    }
+
     private String resolveLocationForMatch(Match match) {
-        Team homeTeam = leagueData.getTeamByNumber(match.getHome()).get();
+        Optional<Team> homeTeam = leagueData.getTeamByNumber(match.getHome());
         StringBuilder sb = new StringBuilder();
-        sb.append(homeTeam.getVenue()).append(", ").append(homeTeam.getAddress());
+        homeTeam.ifPresent(t -> sb.append(t.getVenue()).append(", ").append(t.getAddress()));
         return sb.toString();
     }
 
     private String resolveDescriptionForMatch(Match match) {
-        Team homeTeam = leagueData.getTeamByNumber(match.getHome()).get();
+        Optional<Team> homeTeam = leagueData.getTeamByNumber(match.getHome());
         StringBuilder sb = new StringBuilder();
-        sb.append("Darts match\n").append(leagueData.getName()).append(", ").append(leagueData.getLeagueMetaData().getSeasonName()).append("\n");
-        sb.append(leagueData.getTeamByNumber(match.getHome()).get().getName()).append(" - ").append(leagueData.getTeamByNumber(match.getAway()).get().getName()).append("\n");
-        sb.append("Match in Runde ").append(match.getRound()).append(", Match ID: ").append(match.getMatchID());
-        sb.append("Gaststätte: ").append(homeTeam.getVenue()).append("\n");
-        sb.append("Adresse: ").append(homeTeam.getAddress()).append("\n");
-        sb.append("Kapitän: ").append(homeTeam.getCaptain()).append("\n");
-        sb.append("Telefon: ").append(homeTeam.getPhone());
+        if (homeTeam.isPresent()) {
+            sb.append("Darts match\n").append(leagueData.getName()).append(", ").append(leagueData.getLeagueMetaData().getSeasonName()).append("\n");
+            sb.append(resolveTeamName(match.getHome())).append(" - ").append(resolveTeamName(match.getAway())).append("\n");
+            sb.append("Match in Runde ").append(match.getRound()).append(", Match ID: ").append(match.getMatchID());
+            sb.append("Gaststätte: ").append(homeTeam.get().getVenue()).append("\n");
+            sb.append("Adresse: ").append(homeTeam.get().getAddress()).append("\n");
+            sb.append("Kapitän: ").append(homeTeam.get().getCaptain()).append("\n");
+            sb.append("Telefon: ").append(homeTeam.get().getPhone());
+        }
         return sb.toString();
 
     }
