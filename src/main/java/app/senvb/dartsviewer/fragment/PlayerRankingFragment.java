@@ -54,7 +54,7 @@ public class PlayerRankingFragment extends Fragment {
         TextView gamesSetsView = inflateRow.findViewById(R.id.player_gamesSets);
         TextView teamView = inflateRow.findViewById(R.id.player_team);
         ((TextView) inflateRow.findViewById(R.id.player_rank)).setText(String.format(Locale.getDefault(), "%d", p.getRank()));
-        teamView.setText(leagueData.getTeamByNumber(p.getTeamID()).getName());
+        teamView.setText(leagueData.getTeamByNumber(p.getTeamID()).get().getName());
         StringBuilder sb = new StringBuilder();
         sb.append(p.getGamesPos()).append(":").append(p.getGamesNeg()).append(StringUtils.LF);
         sb.append(p.getSetsPos()).append(":").append(p.getSetsNeg());

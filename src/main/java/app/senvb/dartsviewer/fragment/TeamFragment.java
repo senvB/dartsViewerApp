@@ -79,7 +79,7 @@ public class TeamFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_team, container, false);
         Bundle b = getArguments();
         this.leagueData = (LeagueData) b.get("leagueData");
-        this.team = this.leagueData.getTeamByNumber(b.getInt("teamID"));
+        this.team = this.leagueData.getTeamByNumber(b.getInt("teamID")).get();
         ((TextView) rootView.findViewById(R.id.teamTitle)).setText(this.team.getName());
         ((TextView) rootView.findViewById(R.id.teamVenue)).setText(this.team.getVenue());
         TextView address1 = rootView.findViewById(R.id.teamAddress1);
@@ -147,9 +147,9 @@ public class TeamFragment extends Fragment {
         roundGameView.setPaintFlags(roundGameView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         roundGameView.setOnClickListener(this.matchCalendarListener);
 
-        awayView.setText(leagueData.getTeamByNumber(m.getAway()).getName());
+        awayView.setText(leagueData.getTeamByNumber(m.getAway()).get().getName());
         dashView.setText(" - ");
-        homeView.setText(leagueData.getTeamByNumber(m.getHome()).getName());
+        homeView.setText(leagueData.getTeamByNumber(m.getHome()).get().getName());
         StringBuilder sb2 = new StringBuilder();
         if (m.isPlayed()) {
             sb2.append(m.getHomeMatches()).append(":").append(m.getAwayMatches()).append(StringUtils.LF);
@@ -194,7 +194,7 @@ public class TeamFragment extends Fragment {
         TextView gamesSetsView = inflateRow.findViewById(R.id.player_gamesSets);
         TextView teamView = inflateRow.findViewById(R.id.player_team);
         ((TextView) inflateRow.findViewById(R.id.player_rank)).setText(String.format(Locale.getDefault(), "%d", p.getRank()));
-        teamView.setText(leagueData.getTeamByNumber(p.getTeamID()).getName());
+        teamView.setText(leagueData.getTeamByNumber(p.getTeamID()).get().getName());
         StringBuilder sb = new StringBuilder();
         sb.append(p.getGamesPos()).append(":").append(p.getGamesNeg()).append(StringUtils.LF);
         sb.append(p.getSetsPos()).append(":").append(p.getSetsNeg());

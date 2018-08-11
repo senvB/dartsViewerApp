@@ -64,9 +64,9 @@ public class MatchesFragment extends Fragment {
         roundGameView.setPaintFlags(roundGameView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         roundGameView.setOnClickListener(this.matchCalendarListener);
 
-        awayView.setText(leagueData.getTeamByNumber(m.getAway()).getName());
+        awayView.setText(leagueData.getTeamByNumber(m.getAway()).get().getName());
         dashView.setText(" - ");
-        homeView.setText(leagueData.getTeamByNumber(m.getHome()).getName());
+        homeView.setText(leagueData.getTeamByNumber(m.getHome()).get().getName());
         StringBuilder sb = new StringBuilder();
         if (m.isPlayed()) {
             sb.append(m.getHomeMatches()).append(":").append(m.getAwayMatches()).append(StringUtils.LF);

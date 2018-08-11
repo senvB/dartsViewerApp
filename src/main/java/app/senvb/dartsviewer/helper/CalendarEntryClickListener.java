@@ -47,22 +47,22 @@ public final class CalendarEntryClickListener implements View.OnClickListener {
     private String resolveTitleForMatch(Match match) {
         StringBuilder sb = new StringBuilder();
         sb.append("Darts ").append(leagueData.getName()).append(": ");
-        sb.append(leagueData.getTeamByNumber(match.getHome()).getName()).append(" - ").append(leagueData.getTeamByNumber(match.getAway()).getName());
+        sb.append(leagueData.getTeamByNumber(match.getHome()).get().getName()).append(" - ").append(leagueData.getTeamByNumber(match.getAway()).get().getName());
         return sb.toString();
     }
 
     private String resolveLocationForMatch(Match match) {
-        Team homeTeam = leagueData.getTeamByNumber(match.getHome());
+        Team homeTeam = leagueData.getTeamByNumber(match.getHome()).get();
         StringBuilder sb = new StringBuilder();
         sb.append(homeTeam.getVenue()).append(", ").append(homeTeam.getAddress());
         return sb.toString();
     }
 
     private String resolveDescriptionForMatch(Match match) {
-        Team homeTeam = leagueData.getTeamByNumber(match.getHome());
+        Team homeTeam = leagueData.getTeamByNumber(match.getHome()).get();
         StringBuilder sb = new StringBuilder();
         sb.append("Darts match\n").append(leagueData.getName()).append(", ").append(leagueData.getLeagueMetaData().getSeasonName()).append("\n");
-        sb.append(leagueData.getTeamByNumber(match.getHome()).getName()).append(" - ").append(leagueData.getTeamByNumber(match.getAway()).getName()).append("\n");
+        sb.append(leagueData.getTeamByNumber(match.getHome()).get().getName()).append(" - ").append(leagueData.getTeamByNumber(match.getAway()).get().getName()).append("\n");
         sb.append("Match in Runde ").append(match.getRound()).append(", Match ID: ").append(match.getMatchID());
         sb.append("Gaststätte: ").append(homeTeam.getVenue()).append("\n");
         sb.append("Adresse: ").append(homeTeam.getAddress()).append("\n");
