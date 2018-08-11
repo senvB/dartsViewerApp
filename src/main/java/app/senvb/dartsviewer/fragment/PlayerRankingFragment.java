@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Locale;
 
 import app.senvb.dartsviewer.R;
+import app.senvb.dartsviewer.helper.TeamResolver;
 import senvb.lib.dsabLoader.LeagueData;
 import senvb.lib.dsabLoader.Player;
 
@@ -27,7 +28,8 @@ public class PlayerRankingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_league_player_ranking, container, false);
         leagueData = (LeagueData) getArguments().get("leagueData");
-        ((TextView) rootView.findViewById(R.id.teamRankingTitle)).setText(new StringBuilder(String.valueOf(leagueData.getName())).append(" - Einzelrangliste").toString());
+        String rankingTitle = leagueData.getName() + " - Einzelrangliste";
+        ((TextView) rootView.findViewById(R.id.teamRankingTitle)).setText(rankingTitle);
         TextView region = rootView.findViewById(R.id.regionTitle);
         ((TextView) rootView.findViewById(R.id.seasonTitle)).setText(leagueData.getLeagueMetaData().getSeasonName());
         region.setText(leagueData.getLeagueMetaData().getRegionName());
@@ -48,13 +50,15 @@ public class PlayerRankingFragment extends Fragment {
         }
     }
 
+
+
     private TableRow createPlayerRow(Player p, LeagueData leagueData) {
         TableRow inflateRow = (TableRow) View.inflate(getActivity(), R.layout.player_ranking_row, null);
         TextView setNameView = inflateRow.findViewById(R.id.player_name);
         TextView gamesSetsView = inflateRow.findViewById(R.id.player_gamesSets);
         TextView teamView = inflateRow.findViewById(R.id.player_team);
         ((TextView) inflateRow.findViewById(R.id.player_rank)).setText(String.format(Locale.getDefault(), "%d", p.getRank()));
-        teamView.setText(leagueData.getTeamByNumber(p.getTeamID()).getName());
+        teamView.setText(TeamResolver.resolveTeamName(p.getTeamID(), leagueData));
         StringBuilder sb = new StringBuilder();
         sb.append(p.getGamesPos()).append(":").append(p.getGamesNeg()).append(StringUtils.LF);
         sb.append(p.getSetsPos()).append(":").append(p.getSetsNeg());

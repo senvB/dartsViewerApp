@@ -1,108 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:layout_width="match_parent"
         android:padding="3dp">
 
         <TextView
             android:id="@+id/regionTitle"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/divider1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/regionTitle"
-            android:layout_width="wrap_content"
             android:text=" - "
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/seasonTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/divider1"
-            android:layout_width="wrap_content"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/teamRankingTitle"
-            android:layout_below="@id/seasonTitle"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/seasonTitle"
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/lastUpdateLeagueData"
-            android:layout_below="@id/teamRankingTitle"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textSize="12sp" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teamRankingTitle"
+            android:textSize="12sp"/>
 
         <ImageButton
+            android:id="@+id/btnLeageDataReload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:background="@drawable/rounded_button"
             android:contentDescription="@string/refresh"
-            android:id="@+id/btnLeageDataReload"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:padding="0dp"
-            android:src="@drawable/ic_action_refresh" />
+            android:src="@drawable/ic_action_refresh"/>
 
         <Button
-            android:background="@drawable/rounded_button"
             android:id="@+id/btnSingleRanking"
-            android:layout_below="@id/lastUpdateLeagueData"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/lastUpdateLeagueData"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="3dp"
-            android:layout_width="wrap_content"
+            android:background="@drawable/rounded_button"
             android:minHeight="20dp"
             android:text="Spieler"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <Button
-            android:background="@drawable/rounded_button"
             android:id="@+id/btnMatchPlan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/lastUpdateLeagueData"
-            android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
             android:layout_marginTop="3dp"
-            android:layout_width="wrap_content"
+            android:background="@drawable/rounded_button"
             android:minHeight="20dp"
             android:text="Spielplan"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <CheckBox
-            style="?android:attr/starStyle"
             android:id="@+id/favorite"
-            android:layout_below="@id/lastUpdateLeagueData"
-            android:layout_centerHorizontal="true"
+            style="?android:attr/starStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_below="@id/lastUpdateLeagueData"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <ScrollView
-        android:fillViewport="true"
         android:id="@+id/layout"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="horizontal|vertical">
 
         <TableLayout
             android:id="@+id/teamRanking"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:shrinkColumns="*"
-            android:stretchColumns="*" />
+            android:stretchColumns="*"/>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btnHomeRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/rounded_button"
+                android:minHeight="20dp"
+                android:minWidth="100dp"
+                android:text="Heim"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btnFullRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/rounded_button"
+                android:minHeight="20dp"
+                android:minWidth="100dp"
+                android:text="Gesamt"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btnAwayRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/rounded_button"
+                android:minHeight="20dp"
+                android:minWidth="100dp"
+                android:text="Auswärts"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btnFirstHalfRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_button"
+                android:minHeight="20dp"
+                android:text="Hinrunde"
+                android:layout_marginRight="30dp"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btnSecondHalfRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_button"
+                android:minHeight="20dp"
+                android:text="Rückrunde"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

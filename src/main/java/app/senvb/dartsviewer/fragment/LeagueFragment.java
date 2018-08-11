@@ -1,5 +1,6 @@
 package app.senvb.dartsviewer.fragment;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,62 +38,21 @@ import senvb.lib.dsabLoader.Team;
 public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.LeagueDataDownloadHandler {
 
     private static final String TAG = "LeagueFragment";
-
+    private final OnClickListener clickListener;
     private Button btnMatches;
     private Button btnPlayer;
-    private final OnClickListener clickListener;
+    private Button btnHomeRanking;
+    private Button btnAwayRanking;
+    private Button btnFirstHalfRanking;
+    private Button btnSecondHalfHalfRanking;
+    private Button btnFullRanking;
     private CheckBox favoriteCheck;
     private TextView lastUpdateField;
     private LeagueData leagueData;
     private LeagueMetaData leagueInfo;
     private TableLayout tableLayout;
 
-    private final class ButtonClickListener implements OnClickListener {
-
-        public void onClick(View v) {
-            int btnID = v.getId();
-            Fragment f = null;
-            Bundle b = new Bundle();
-            b.putSerializable("leagueData", leagueData);
-            if (btnID == R.id.btnLeageDataReload) {
-                DataCache.getInstance().removeLeagueDataFromCache(leagueInfo.getRegionID(), leagueInfo.getSeasonID(), leagueInfo.getLeagueID());
-                updateLeagueData();
-            } else if (btnID == R.id.btnSingleRanking) {
-                f = new PlayerRankingFragment();
-            } else if (btnID == R.id.btnMatchPlan) {
-                f = new MatchesFragment();
-            } else if (btnID == R.id.teamName) {
-                int tID = leagueData.getTeamByName(((TextView) v).getText().toString()).getTeamID();
-                f = new TeamFragment();
-                b.putInt("teamID", tID);
-            }
-            if (f != null) {
-                f.setArguments(b);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, f).addToBackStack(null).commit();
-            }
-        }
-    }
-
-    class FavoriteClickListener implements OnClickListener {
-
-        public void onClick(View view) {
-            if (((CheckBox) view).isChecked()) {
-                try {
-                    FavoriteHolder.getInstance().addFavorite(leagueData);
-                    Toast.makeText(getActivity(), "Favorit hinzugefügt", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    Log.e(TAG, "Cannot add favorite", e);
-                }
-            } else {
-                try {
-                    FavoriteHolder.getInstance().removeFavorite(leagueData);
-                    Toast.makeText(getActivity(), "Favorit gel\u00f6scht", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    Log.e(TAG, "Cannot remove favorite", e);
-                }
-            }
-        }
-    }
+    private Button currentRanking;
 
     public LeagueFragment() {
         this.clickListener = new ButtonClickListener();
@@ -108,16 +68,26 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
         regionText.setText(this.leagueInfo.getRegionName());
         tableLayout = rootView.findViewById(R.id.teamRanking);
         lastUpdateField = rootView.findViewById(R.id.lastUpdateLeagueData);
-        rootView.findViewById(R.id.btnMatchPlan).setOnClickListener(this.clickListener);
         rootView.findViewById(R.id.btnLeageDataReload).setOnClickListener(this.clickListener);
-        rootView.findViewById(R.id.btnSingleRanking).setOnClickListener(this.clickListener);
         favoriteCheck = rootView.findViewById(R.id.favorite);
         favoriteCheck.setOnClickListener(new FavoriteClickListener());
         if (FavoriteHolder.getInstance().isFavoriteLeague(this.leagueInfo)) {
             favoriteCheck.setChecked(true);
         }
         btnMatches = rootView.findViewById(R.id.btnMatchPlan);
+        btnMatches.setOnClickListener(this.clickListener);
         btnPlayer = rootView.findViewById(R.id.btnSingleRanking);
+        btnPlayer.setOnClickListener(this.clickListener);
+        btnFullRanking = rootView.findViewById(R.id.btnFullRanking);
+        btnFullRanking.setOnClickListener(this.clickListener);
+        btnFirstHalfRanking = rootView.findViewById(R.id.btnFirstHalfRanking);
+        btnFirstHalfRanking.setOnClickListener(this.clickListener);
+        btnSecondHalfHalfRanking = rootView.findViewById(R.id.btnSecondHalfRanking);
+        btnSecondHalfHalfRanking.setOnClickListener(this.clickListener);
+        btnHomeRanking = rootView.findViewById(R.id.btnHomeRanking);
+        btnHomeRanking.setOnClickListener(this.clickListener);
+        btnAwayRanking = rootView.findViewById(R.id.btnAwayRanking);
+        btnAwayRanking.setOnClickListener(this.clickListener);
         return rootView;
     }
 
@@ -141,14 +111,23 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
         }
     }
 
+    private void updateRankingTable(LeagueData.RankingType rt, Button btn) {
+        tableLayout.removeAllViews();
+        tableLayout.addView(createHeaderRow());
+        for (Team t : leagueData.getTeamsWithRanking(rt).getTeams()) {
+            tableLayout.addView(createTeamRow(t));
+        }
+        btn.setBackgroundColor(Color.CYAN);
+        if (currentRanking != null) {
+            currentRanking.setBackgroundColor(Color.GRAY);
+        }
+        currentRanking= btn;
+    }
+
     public void handleLeagueData(LeagueData ld) {
         leagueData = ld;
         if (ld != null) {
-            tableLayout.removeAllViews();
-            tableLayout.addView(createHeaderRow());
-            for (Team t : leagueData.getTeams().getTeams()) {
-                tableLayout.addView(createTeamRow(t));
-            }
+            updateRankingTable(LeagueData.RankingType.FULL, btnFullRanking);
             Date lastModDate = DataCache.getInstance().getLastUpdateDateForLeagueData(this.leagueInfo.getRegionID(), this.leagueInfo.getSeasonID(), this.leagueInfo.getLeagueID());
             DateFormat dfDate = android.text.format.DateFormat.getDateFormat(getContext());
             DateFormat dfTime = android.text.format.DateFormat.getTimeFormat(getContext());
@@ -202,5 +181,62 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
         pointsTotalView.setTextSize(10.0f);
         gamesSetsRatioView.setTextSize(10.0f);
         return inflateRow;
+    }
+
+    private final class ButtonClickListener implements OnClickListener {
+
+        public void onClick(View v) {
+            int btnID = v.getId();
+            Fragment f = null;
+            Bundle b = new Bundle();
+            b.putSerializable("leagueData", leagueData);
+            if (btnID == R.id.btnLeageDataReload) {
+                DataCache.getInstance().removeLeagueDataFromCache(leagueInfo.getRegionID(), leagueInfo.getSeasonID(), leagueInfo.getLeagueID());
+                updateLeagueData();
+            } else if (btnID == R.id.btnSingleRanking) {
+                f = new PlayerRankingFragment();
+            } else if (btnID == R.id.btnFullRanking) {
+                updateRankingTable(LeagueData.RankingType.FULL, btnFullRanking);
+            } else if (btnID == R.id.btnHomeRanking) {
+                updateRankingTable(LeagueData.RankingType.HOME, btnHomeRanking);
+            } else if (btnID == R.id.btnAwayRanking) {
+                updateRankingTable(LeagueData.RankingType.AWAY, btnAwayRanking);
+            } else if (btnID == R.id.btnFirstHalfRanking) {
+                updateRankingTable(LeagueData.RankingType.FIRST_HALF, btnFirstHalfRanking);
+            } else if (btnID == R.id.btnSecondHalfRanking) {
+                updateRankingTable(LeagueData.RankingType.SECOND_HALF, btnSecondHalfHalfRanking);
+            } else if (btnID == R.id.btnMatchPlan) {
+                f = new MatchesFragment();
+            } else if (btnID == R.id.teamName) {
+                int tID = leagueData.getTeamByName(((TextView) v).getText().toString()).get().getTeamID();
+                f = new TeamFragment();
+                b.putInt("teamID", tID);
+            }
+            if (f != null) {
+                f.setArguments(b);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, f).addToBackStack(null).commit();
+            }
+        }
+    }
+
+    class FavoriteClickListener implements OnClickListener {
+
+        public void onClick(View view) {
+            if (((CheckBox) view).isChecked()) {
+                try {
+                    FavoriteHolder.getInstance().addFavorite(leagueData);
+                    Toast.makeText(getActivity(), "Favorit hinzugefügt", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    Log.e(TAG, "Cannot add favorite", e);
+                }
+            } else {
+                try {
+                    FavoriteHolder.getInstance().removeFavorite(leagueData);
+                    Toast.makeText(getActivity(), "Favorit gel\u00f6scht", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    Log.e(TAG, "Cannot remove favorite", e);
+                }
+            }
+        }
     }
 }

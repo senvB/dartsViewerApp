@@ -14,11 +14,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.DateFormat;
 import java.util.Locale;
+import java.util.Optional;
 
 import app.senvb.dartsviewer.R;
 import app.senvb.dartsviewer.helper.CalendarEntryClickListener;
+import app.senvb.dartsviewer.helper.TeamResolver;
 import senvb.lib.dsabLoader.LeagueData;
 import senvb.lib.dsabLoader.Match;
+import senvb.lib.dsabLoader.Team;
 
 
 public class MatchesFragment extends Fragment {
@@ -49,11 +52,11 @@ public class MatchesFragment extends Fragment {
         tableLayout.removeAllViews();
         tableLayout.addView(createHeaderRow());
         for (Match m : leagueData.getMatches().getMatches()) {
-            tableLayout.addView(createMatchRow(m, leagueData));
+            tableLayout.addView(createMatchRow(m));
         }
     }
 
-    private TableRow createMatchRow(Match m, LeagueData leagueData) {
+    private TableRow createMatchRow(Match m) {
         TableRow inflateRow = (TableRow) View.inflate(getActivity(), R.layout.matches_row, null);
         TextView roundGameView = inflateRow.findViewById(R.id.roundGame);
         TextView homeView = inflateRow.findViewById(R.id.home);
@@ -64,9 +67,9 @@ public class MatchesFragment extends Fragment {
         roundGameView.setPaintFlags(roundGameView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         roundGameView.setOnClickListener(this.matchCalendarListener);
 
-        awayView.setText(leagueData.getTeamByNumber(m.getAway()).getName());
+        awayView.setText(TeamResolver.resolveTeamName(m.getAway(), leagueData));
         dashView.setText(" - ");
-        homeView.setText(leagueData.getTeamByNumber(m.getHome()).getName());
+        homeView.setText(TeamResolver.resolveTeamName(m.getHome(), leagueData));
         StringBuilder sb = new StringBuilder();
         if (m.isPlayed()) {
             sb.append(m.getHomeMatches()).append(":").append(m.getAwayMatches()).append(StringUtils.LF);
