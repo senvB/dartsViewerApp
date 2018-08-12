@@ -26,9 +26,6 @@ public class TeamResolver {
 
     public static String resolveTeamName(int id, LeagueData leagueData) {
         Optional<Team> team = leagueData.getTeamByNumber(id);
-        if (team.isPresent()) {
-            return team.get().getName();
-        }
-        return "";
+        return team.isPresent() ? team.get().getName() : "";
     }
 }

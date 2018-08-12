@@ -35,12 +35,8 @@ public class CurrentTaskHolder {
         return holder;
     }
 
-    public boolean setCurrentTask(DartsViewerAsyncTask<?, ?> task) {
-        if (isTaskRunning()) {
-            return false;
-        }
+    public void setCurrentTask(DartsViewerAsyncTask<?, ?> task) {
         currentTask = task;
-        return true;
     }
 
     public boolean isTaskRunning() {

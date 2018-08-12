@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
 
 import app.senvb.dartsviewer.DartsViewerActivity;
 import app.senvb.dartsviewer.R;
@@ -173,10 +174,9 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
         teamNameView.setText(t.getName());
         gamesTotalView.setText(String.format(Locale.getDefault(), "%d", t.getMatchesPlayed()));
         pointsTotalView.setText(String.format(Locale.getDefault(), "%d", t.getPoints()));
-        StringBuilder sb = new StringBuilder();
-        sb.append(t.getGamesPos()).append(":").append(t.getGamesNeg()).append(StringUtils.LF);
-        sb.append(t.getSetsPos()).append(":").append(t.getSetsNeg());
-        gamesSetsRatioView.setText(sb.toString());
+        String sb = t.getGamesPos() + ":" + t.getGamesNeg() + StringUtils.LF + t
+                .getSetsPos() + ":" + t.getSetsNeg();
+        gamesSetsRatioView.setText(sb);
         return inflateRow;
     }
 
@@ -225,9 +225,14 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
             } else if (btnID == R.id.btnMatchPlan) {
                 f = new MatchesFragment();
             } else if (btnID == R.id.teamName) {
-                int tID = leagueData.getTeamByName(((TextView) v).getText().toString()).get().getTeamID();
-                f = new TeamFragment();
-                b.putInt("teamID", tID);
+                Optional<Team> tm = leagueData.getTeamByName(((TextView) v).getText().toString());
+                if (tm.isPresent()) {
+                    int tID = tm.get().getTeamID();
+                    f = new TeamFragment();
+                    b.putInt("teamID", tID);
+                } else {
+                    Log.e(TAG, "Cannot resolve team from its name.");
+                }
             }
             if (f != null) {
                 f.setArguments(b);

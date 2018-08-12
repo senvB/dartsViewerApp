@@ -51,7 +51,7 @@
         <TableLayout
             android:id="@+id/matchesList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:shrinkColumns="*"
             android:stretchColumns="*"
             android:textSize="12sp" />

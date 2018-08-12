@@ -20,6 +20,7 @@ package app.senvb.dartsviewer.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,17 +40,23 @@ import senvb.lib.dsabLoader.Player;
 
 public class PlayerRankingFragment extends Fragment {
 
+    private static final String TAG = "PlayerRankingFragment";
+
     private LeagueData leagueData;
     private TableLayout tableLayout;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_league_player_ranking, container, false);
         leagueData = (LeagueData) getArguments().get("leagueData");
-        String rankingTitle = leagueData.getName() + " - Einzelrangliste";
-        ((TextView) rootView.findViewById(R.id.teamRankingTitle)).setText(rankingTitle);
-        TextView region = rootView.findViewById(R.id.regionTitle);
-        ((TextView) rootView.findViewById(R.id.seasonTitle)).setText(leagueData.getLeagueMetaData().getSeasonName());
-        region.setText(leagueData.getLeagueMetaData().getRegionName());
+        if (leagueData != null) {
+            String rankingTitle = leagueData.getName() + " - Einzelrangliste";
+            ((TextView) rootView.findViewById(R.id.teamRankingTitle)).setText(rankingTitle);
+            TextView region = rootView.findViewById(R.id.regionTitle);
+            ((TextView) rootView.findViewById(R.id.seasonTitle)).setText(leagueData.getLeagueMetaData().getSeasonName());
+            region.setText(leagueData.getLeagueMetaData().getRegionName());
+        } else {
+            Log.e(TAG, "Cannot read league data information from arguments");
+        }
         tableLayout = rootView.findViewById(R.id.playerRanking);
         return rootView;
     }
@@ -59,7 +66,7 @@ public class PlayerRankingFragment extends Fragment {
         handleLeagueData();
     }
 
-    public void handleLeagueData() {
+    private void handleLeagueData() {
         tableLayout.removeAllViews();
         tableLayout.addView(createHeaderRow());
         for (Player p : leagueData.getPlayers().getPlayerRanking()) {
@@ -76,10 +83,9 @@ public class PlayerRankingFragment extends Fragment {
         TextView teamView = inflateRow.findViewById(R.id.player_team);
         ((TextView) inflateRow.findViewById(R.id.player_rank)).setText(String.format(Locale.getDefault(), "%d", p.getRank()));
         teamView.setText(TeamResolver.resolveTeamName(p.getTeamID(), leagueData));
-        StringBuilder sb = new StringBuilder();
-        sb.append(p.getGamesPos()).append(":").append(p.getGamesNeg()).append(StringUtils.LF);
-        sb.append(p.getSetsPos()).append(":").append(p.getSetsNeg());
-        gamesSetsView.setText(sb.toString());
+        String sb = p.getGamesPos() + ":" + p.getGamesNeg() + StringUtils.LF + p
+                .getSetsPos() + ":" + p.getSetsNeg();
+        gamesSetsView.setText(sb);
         setNameView.setText(p.getName());
         return inflateRow;
     }

@@ -28,7 +28,6 @@ public class Favorite implements Serializable {
 
     private static final String NO_STRING = "-";
     private static final int NO_TEAM = -1;
-    private static final long serialVersionUID = -1L;
 
     private final LeagueMetaData leagueMetaData;
     private final int teamID;

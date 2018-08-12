@@ -242,7 +242,7 @@ public class DataCache implements CacheStateListener {
     }
 
     @Override
-    public int clearCache() throws IOException {
+    public int clearCache() {
         int totalNrFiles = webDataDir.listFiles().length + favoritesDir.listFiles().length;
         int notDeleted = 0;
         for (File f : webDataDir.listFiles()) {

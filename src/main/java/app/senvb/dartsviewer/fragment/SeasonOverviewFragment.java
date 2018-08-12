@@ -72,8 +72,10 @@ public class SeasonOverviewFragment extends ListFragment implements SeasonOvervi
         public int compare(Season lhs, Season rhs) {
            if (lhs.getStartDate().after(rhs.getStartDate())) {
                return -1;
+           } else if (lhs.getStartDate().before(rhs.getStartDate())) {
+               return 1;
            }
-           return 1;
+           return 0;
         }
     }
 

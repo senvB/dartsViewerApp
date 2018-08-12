@@ -38,11 +38,13 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import app.senvb.dartsviewer.R;
 import app.senvb.dartsviewer.favorite.FavoriteHolder;
 import app.senvb.dartsviewer.helper.CalendarEntryClickListener;
+import app.senvb.dartsviewer.helper.TeamResolver;
 import senvb.lib.dsabLoader.LeagueData;
 import senvb.lib.dsabLoader.Match;
 import senvb.lib.dsabLoader.Player;
@@ -95,32 +97,37 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_team, container, false);
         Bundle b = getArguments();
-        this.leagueData = (LeagueData) b.get("leagueData");
-        this.team = this.leagueData.getTeamByNumber(b.getInt("teamID")).get();
-        ((TextView) rootView.findViewById(R.id.teamTitle)).setText(this.team.getName());
-        ((TextView) rootView.findViewById(R.id.teamVenue)).setText(this.team.getVenue());
-        TextView address1 = rootView.findViewById(R.id.teamAddress1);
-        TextView address2 = rootView.findViewById(R.id.teamAddress2);
-        String[] adressString = this.team.getAddress().split(",");
-        if (adressString.length > 0) {
-            address1.setText(adressString[0].trim());
+        leagueData = (LeagueData) b.get("leagueData");
+        Optional<Team> t = leagueData.getTeamByNumber(b.getInt("teamID"));
+        if (t.isPresent()) {
+            team = t.get();
+            ((TextView) rootView.findViewById(R.id.teamTitle)).setText(team.getName());
+            ((TextView) rootView.findViewById(R.id.teamVenue)).setText(team.getVenue());
+            TextView address1 = rootView.findViewById(R.id.teamAddress1);
+            TextView address2 = rootView.findViewById(R.id.teamAddress2);
+            String[] adressString = team.getAddress().split(",");
+            if (adressString.length > 0) {
+                address1.setText(adressString[0].trim());
+            } else {
+                address1.setText("");
+            }
+            if (adressString.length > 1) {
+                address2.setText(adressString[1].trim());
+            } else {
+                address2.setText("");
+            }
+            ((TextView) rootView.findViewById(R.id.teamCaptain)).setText(team.getCaptain());
+            ((TextView) rootView.findViewById(R.id.teamPhone)).setText(team.getPhone());
+            rootView.findViewById(R.id.btnShowAddressInMap).setOnClickListener(new ButtonClickListener());
+            tableLayoutPlayer = rootView.findViewById(R.id.teamPlayer);
+            tableLayoutMatches = rootView.findViewById(R.id.teamMatches);
+            CheckBox favoriteCheck = rootView.findViewById(R.id.favorite);
+            favoriteCheck.setOnClickListener(new FavoriteClickListener());
+            if (FavoriteHolder.getInstance().isFavoriteTeam(leagueData, team)) {
+                favoriteCheck.setChecked(true);
+            }
         } else {
-            address1.setText("");
-        }
-        if (adressString.length > 1) {
-            address2.setText(adressString[1].trim());
-        } else {
-            address2.setText("");
-        }
-        ((TextView) rootView.findViewById(R.id.teamCaptain)).setText(this.team.getCaptain());
-        ((TextView) rootView.findViewById(R.id.teamPhone)).setText(this.team.getPhone());
-        rootView.findViewById(R.id.btnShowAddressInMap).setOnClickListener(new ButtonClickListener());
-        this.tableLayoutPlayer = rootView.findViewById(R.id.teamPlayer);
-        this.tableLayoutMatches = rootView.findViewById(R.id.teamMatches);
-        CheckBox favoriteCheck = rootView.findViewById(R.id.favorite);
-        favoriteCheck.setOnClickListener(new FavoriteClickListener());
-        if (FavoriteHolder.getInstance().isFavoriteTeam(this.leagueData, this.team)) {
-            favoriteCheck.setChecked(true);
+            Log.e(TAG, "Cannot resolve team from ID.");
         }
         matchCalendarListener = new CalendarEntryClickListener(leagueData, getActivity());
         return rootView;
@@ -131,7 +138,7 @@ public class TeamFragment extends Fragment {
         handleLeagueData();
     }
 
-    public void handleLeagueData() {
+    private void handleLeagueData() {
         this.tableLayoutPlayer.removeAllViews();
         this.tableLayoutPlayer.addView(createHeaderRowPlayer());
         List<Player> teamPlayer = filterPlayer(this.leagueData.getPlayers().getPlayerRanking());
@@ -164,9 +171,9 @@ public class TeamFragment extends Fragment {
         roundGameView.setPaintFlags(roundGameView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         roundGameView.setOnClickListener(this.matchCalendarListener);
 
-        awayView.setText(leagueData.getTeamByNumber(m.getAway()).get().getName());
+        awayView.setText(TeamResolver.resolveTeamName(m.getAway(), leagueData));
         dashView.setText(" - ");
-        homeView.setText(leagueData.getTeamByNumber(m.getHome()).get().getName());
+        homeView.setText(TeamResolver.resolveTeamName(m.getHome(), leagueData));
         StringBuilder sb2 = new StringBuilder();
         if (m.isPlayed()) {
             sb2.append(m.getHomeMatches()).append(":").append(m.getAwayMatches()).append(StringUtils.LF);
@@ -211,11 +218,10 @@ public class TeamFragment extends Fragment {
         TextView gamesSetsView = inflateRow.findViewById(R.id.player_gamesSets);
         TextView teamView = inflateRow.findViewById(R.id.player_team);
         ((TextView) inflateRow.findViewById(R.id.player_rank)).setText(String.format(Locale.getDefault(), "%d", p.getRank()));
-        teamView.setText(leagueData.getTeamByNumber(p.getTeamID()).get().getName());
-        StringBuilder sb = new StringBuilder();
-        sb.append(p.getGamesPos()).append(":").append(p.getGamesNeg()).append(StringUtils.LF);
-        sb.append(p.getSetsPos()).append(":").append(p.getSetsNeg());
-        gamesSetsView.setText(sb.toString());
+        teamView.setText(TeamResolver.resolveTeamName(p.getTeamID(), leagueData));
+        String sb = p.getGamesPos() + ":" + p.getGamesNeg() + StringUtils.LF + p
+                .getSetsPos() + ":" + p.getSetsNeg();
+        gamesSetsView.setText(sb);
         setNameView.setText(p.getName());
         return inflateRow;
     }

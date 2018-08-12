@@ -10,7 +10,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "app.senvb.dartsviewer"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 26
         versionCode 12
         versionName "0.12"

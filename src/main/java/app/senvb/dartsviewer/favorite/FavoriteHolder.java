@@ -36,8 +36,6 @@ import senvb.lib.dsabLoader.Team;
 
 public class FavoriteHolder implements Serializable, CacheStateListener {
 
-    private static final long serialVersionUID = 1L;
-
     private static final String TAG = "FavoriteHolder";
 
     private static FavoriteHolder self;

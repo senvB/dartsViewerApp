@@ -63,18 +63,13 @@ public final class CalendarEntryClickListener implements View.OnClickListener {
     }
 
     private String resolveTitleForMatch(Match match) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Darts ").append(leagueData.getName()).append(": ");
-        sb.append(resolveTeamName(match.getHome())).append(" - ").append(resolveTeamName(match.getAway()));
-        return sb.toString();
+        return "Darts " + leagueData.getName() + ": " + resolveTeamName(match.getHome()) + "" +
+                " - " + resolveTeamName(match.getAway());
     }
 
     private String resolveTeamName(int id) {
         Optional<Team> team = leagueData.getTeamByNumber(id);
-        if (team.isPresent()) {
-            return team.get().getName();
-        }
-        return "";
+        return team.isPresent() ? team.get().getName() : "";
     }
 
     private String resolveLocationForMatch(Match match) {
@@ -88,13 +83,14 @@ public final class CalendarEntryClickListener implements View.OnClickListener {
         Optional<Team> homeTeam = leagueData.getTeamByNumber(match.getHome());
         StringBuilder sb = new StringBuilder();
         if (homeTeam.isPresent()) {
+            Team home = homeTeam.get();
             sb.append("Darts match\n").append(leagueData.getName()).append(", ").append(leagueData.getLeagueMetaData().getSeasonName()).append("\n");
             sb.append(resolveTeamName(match.getHome())).append(" - ").append(resolveTeamName(match.getAway())).append("\n");
             sb.append("Match in Runde ").append(match.getRound()).append(", Match ID: ").append(match.getMatchID());
-            sb.append("Gaststätte: ").append(homeTeam.get().getVenue()).append("\n");
-            sb.append("Adresse: ").append(homeTeam.get().getAddress()).append("\n");
-            sb.append("Kapitän: ").append(homeTeam.get().getCaptain()).append("\n");
-            sb.append("Telefon: ").append(homeTeam.get().getPhone());
+            sb.append("Gaststätte: ").append(home.getVenue()).append("\n");
+            sb.append("Adresse: ").append(home.getAddress()).append("\n");
+            sb.append("Kapitän: ").append(home.getCaptain()).append("\n");
+            sb.append("Telefon: ").append(home.getPhone());
         }
         return sb.toString();
 
