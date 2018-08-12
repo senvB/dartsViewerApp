@@ -1,3 +1,20 @@
+/**
+ *  The DartsViewerApp allows to parse and display information for DSAB dart leagues.
+ *  Copyright (C) 2017-2018  Sven Baselau
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as
+ *  published by the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package app.senvb.dartsviewer.fragment;
 
 import android.graphics.Color;
@@ -133,13 +150,13 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
             DateFormat dfTime = android.text.format.DateFormat.getTimeFormat(getContext());
             lastUpdateField.setText(String.format(Locale.getDefault(), "letztes Update: %s, %s", dfDate.format(lastModDate), dfTime.format(lastModDate)));
             if (!ld.hasPlayers()) {
-                Toast.makeText(getActivity(), "Fehler beim Lesen der Spielerdaten. Diese können aktuell nicht angezeigt werden", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Fehler beim Lesen der Spielerdaten von der DSAB Webseite. Diese können aktuell nicht angezeigt werden", Toast.LENGTH_LONG).show();
             }
         } else {
             btnMatches.setEnabled(false);
             btnPlayer.setEnabled(false);
             favoriteCheck.setEnabled(false);
-            Toast.makeText(getActivity(), "Fehler beim Lesen der Daten. Bitte melden mit Angabe Region, Saison und Liga. Danke", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Fehler beim Lesen der Daten von der DSAB Webseite. Bitte melden mit Angabe Region, Saison und Liga. Danke", Toast.LENGTH_LONG).show();
         }
     }
 
