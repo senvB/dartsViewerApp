@@ -1,4 +1,9 @@
+plugins {
+    id "com.github.hierynomus.license" version "0.14.0"
+}
+
 apply plugin: 'com.android.application'
+
 
 android {
     compileSdkVersion 26
@@ -31,6 +36,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+license {
+    header = file('LICENSE_HEADER')
+    strictCheck true
+    includes  (["**/*.java"])
+}
+
 
 dependencies {
     implementation project(':dsabDataLoader')
