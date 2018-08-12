@@ -10,7 +10,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "app.senvb.dartsviewer"
-        minSdkVersion 24
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 12
         versionName "0.12"
@@ -18,8 +18,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
