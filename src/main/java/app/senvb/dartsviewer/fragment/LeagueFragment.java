@@ -133,13 +133,13 @@ public class LeagueFragment extends Fragment implements LeagueDataDownloadTask.L
             DateFormat dfTime = android.text.format.DateFormat.getTimeFormat(getContext());
             lastUpdateField.setText(String.format(Locale.getDefault(), "letztes Update: %s, %s", dfDate.format(lastModDate), dfTime.format(lastModDate)));
             if (!ld.hasPlayers()) {
-                Toast.makeText(getActivity(), "Fehler beim Lesen der Spielerdaten. Diese können aktuell nicht angezeigt werden", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Fehler beim Lesen der Spielerdaten von der DSAB Webseite. Diese können aktuell nicht angezeigt werden", Toast.LENGTH_LONG).show();
             }
         } else {
             btnMatches.setEnabled(false);
             btnPlayer.setEnabled(false);
             favoriteCheck.setEnabled(false);
-            Toast.makeText(getActivity(), "Fehler beim Lesen der Daten. Bitte melden mit Angabe Region, Saison und Liga. Danke", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Fehler beim Lesen der Daten von der DSAB Webseite. Bitte melden mit Angabe Region, Saison und Liga. Danke", Toast.LENGTH_LONG).show();
         }
     }
 
