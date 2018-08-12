@@ -98,87 +98,94 @@
         android:scrollbarStyle="outsideInset"
         android:scrollbars="horizontal|vertical">
 
-        <TableLayout
-            android:id="@+id/teamRanking"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shrinkColumns="*"
-            android:stretchColumns="*"/>
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/teamRanking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"/>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/btnHomeRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/rounded_button"
+                        android:minHeight="20dp"
+                        android:minWidth="100dp"
+                        android:text="Heim"
+                        android:textSize="14sp"/>
+
+                    <Button
+                        android:id="@+id/btnFullRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/rounded_button"
+                        android:minHeight="20dp"
+                        android:minWidth="100dp"
+                        android:text="Gesamt"
+                        android:textSize="14sp"/>
+
+                    <Button
+                        android:id="@+id/btnAwayRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/rounded_button"
+                        android:minHeight="20dp"
+                        android:minWidth="100dp"
+                        android:text="Auswärts"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/btnFirstHalfRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:minHeight="20dp"
+                        android:text="Hinrunde"
+                        android:textSize="14sp"/>
+
+                    <Button
+                        android:id="@+id/btnSecondHalfRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:minHeight="20dp"
+                        android:text="Rückrunde"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/btnHomeRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/rounded_button"
-                android:minHeight="20dp"
-                android:minWidth="100dp"
-                android:text="Heim"
-                android:textSize="14sp"/>
-
-            <Button
-                android:id="@+id/btnFullRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/rounded_button"
-                android:minHeight="20dp"
-                android:minWidth="100dp"
-                android:text="Gesamt"
-                android:textSize="14sp"/>
-
-            <Button
-                android:id="@+id/btnAwayRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/rounded_button"
-                android:minHeight="20dp"
-                android:minWidth="100dp"
-                android:text="Auswärts"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/btnFirstHalfRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rounded_button"
-                android:minHeight="20dp"
-                android:text="Hinrunde"
-                android:layout_marginRight="30dp"
-                android:textSize="14sp"/>
-
-            <Button
-                android:id="@+id/btnSecondHalfRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rounded_button"
-                android:minHeight="20dp"
-                android:text="Rückrunde"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>

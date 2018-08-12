@@ -96,10 +96,11 @@ public class DataCache implements CacheStateListener {
     }
 
     public final List<Region> readRegionFromCache(String stateName) {
-        try (FileInputStream fis = new FileInputStream(new File(webDataDir, resolveRegionFileName(stateName)))) {
+        File inputFile = new File(webDataDir, resolveRegionFileName(stateName));
+        try (FileInputStream fis = new FileInputStream(inputFile)) {
             return RegionJSON.read(fis);
         } catch (IOException e) {
-            Log.i(TAG, "Cannot read region from cache", e);
+            Log.i(TAG, "Cannot read region from cache: " + inputFile.getAbsolutePath());
             return Collections.emptyList();
         }
     }
@@ -117,10 +118,11 @@ public class DataCache implements CacheStateListener {
     }
 
     public final List<Season> readSeasonsFromCache(int regionID) {
-        try (FileInputStream fis = new FileInputStream(new File(webDataDir, resolveSeasonsFileName(regionID)))) {
+        File inputFile = new File(webDataDir, resolveSeasonsFileName(regionID));
+        try (FileInputStream fis = new FileInputStream(inputFile)) {
             return SeasonJSON.read(fis);
         } catch (IOException e) {
-            Log.i(TAG, "Cannot read season from cache", e);
+            Log.i(TAG, "Cannot read season from cache: " + inputFile.getAbsolutePath());
             return Collections.emptyList();
         }
     }
@@ -147,10 +149,11 @@ public class DataCache implements CacheStateListener {
     }
 
     public final List<LeagueMetaData> readLeagueMetaDataFromCache(int lmdID) {
-        try (FileInputStream fis = new FileInputStream(new File(webDataDir, resolveLeagueMetaDataFileName(lmdID)))) {
+        File inputFile = new File(webDataDir, resolveLeagueMetaDataFileName(lmdID));
+        try (FileInputStream fis = new FileInputStream(inputFile)) {
             return LeagueMetaDataJSON.read(fis);
         } catch (IOException e) {
-            Log.i(TAG, "Cannot read league meta data from cache", e);
+            Log.i(TAG, "Cannot read league meta data from cache: " + inputFile.getAbsolutePath());
             return Collections.emptyList();
         }
     }
@@ -180,10 +183,11 @@ public class DataCache implements CacheStateListener {
     }
 
     public final LeagueData readLeagueDataFromCache(int regionID, int seasonID, int leagueID) {
-        try (FileInputStream fis = new FileInputStream(new File(webDataDir, resolveLeagueDataFileName(regionID, seasonID, leagueID)))) {
+        File inputFile = new File(webDataDir, resolveLeagueDataFileName(regionID, seasonID, leagueID));
+        try (FileInputStream fis = new FileInputStream(inputFile)) {
             return LeagueDataJSON.read(fis);
         } catch (IOException e) {
-            Log.d(TAG, "Cannot read league data from cache", e);
+            Log.d(TAG, "Cannot read league data from cache: " + inputFile.getAbsolutePath());
             return null;
         }
     }

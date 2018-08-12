@@ -32,6 +32,22 @@ Some screenshots from the app in action.
 
 TODO
 
+## App permissions
+The *DartsViewerApp* requires the following permissions to run properly:
+
+- INTERNET
+  - Reading the information from the DSAB website
+- ACCESS_NETWORK_STATE
+  - Checking if network is available
+- WRITE_EXTERNAL_STORAGE
+  - Cache information which has been downloaded already
+- ACCESS_COARSE_LOCATION
+  - Access the current approximate location  
+- ACCESS_FINE_LOCATION
+  - Access the current precise location 
+- ACCESS_LOCATION_EXTRA_COMMANDS
+  - Additional location information
+
 ## Source code
 The source code of the app is made available on GitHub: https://github.com/senvB/dartsViewerApp.
 
