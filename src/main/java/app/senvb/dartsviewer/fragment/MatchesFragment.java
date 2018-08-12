@@ -31,14 +31,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.DateFormat;
 import java.util.Locale;
-import java.util.Optional;
 
 import app.senvb.dartsviewer.R;
 import app.senvb.dartsviewer.helper.CalendarEntryClickListener;
 import app.senvb.dartsviewer.helper.TeamResolver;
 import senvb.lib.dsabLoader.LeagueData;
 import senvb.lib.dsabLoader.Match;
-import senvb.lib.dsabLoader.Team;
 
 
 public class MatchesFragment extends Fragment {
@@ -65,7 +63,7 @@ public class MatchesFragment extends Fragment {
         handleLeagueData();
     }
 
-    public void handleLeagueData() {
+    private void handleLeagueData() {
         tableLayout.removeAllViews();
         tableLayout.addView(createHeaderRow());
         for (Match m : leagueData.getMatches().getMatches()) {

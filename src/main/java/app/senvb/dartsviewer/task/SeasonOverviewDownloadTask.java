@@ -1,26 +1,25 @@
 /**
- *  The DartsViewerApp allows to parse and display information for DSAB dart leagues.
- *  Copyright (C) 2017-2018  Sven Baselau
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as
- *  published by the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * The DartsViewerApp allows to parse and display information for DSAB dart leagues.
+ * Copyright (C) 2017-2018  Sven Baselau
+ * <p>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package app.senvb.dartsviewer.task;
 
 import android.util.Log;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -44,10 +43,6 @@ public class SeasonOverviewDownloadTask extends DartsViewerAsyncTask<Region, Lis
 
     public void setHandler(SeasonOverviewDownloadHandler handler) {
         this.handler = handler;
-    }
-
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     protected List<Season> doInBackground(Region... regions) {
@@ -82,17 +77,10 @@ public class SeasonOverviewDownloadTask extends DartsViewerAsyncTask<Region, Lis
     }
 
     private boolean checkForUpdateNeeded(List<Season> seasons) {
-        if (noSeasonDataStored(seasons)) {
-            return true;
-        }
-        try {
-            return new Date().after(resolveLatestSeason(seasons).getEndDate());
-        } catch (ParseException e) {
-            return true;
-        }
+        return noSeasonDataStored(seasons) || new Date().after(resolveLatestSeason(seasons).getEndDate());
     }
 
-    private Season resolveLatestSeason(List<Season> seasons) throws ParseException {
+    private Season resolveLatestSeason(List<Season> seasons) {
         Season latest = null;
         for (Season s : seasons) {
             if (latest == null || s.getEndDate().after(latest.getEndDate())) {

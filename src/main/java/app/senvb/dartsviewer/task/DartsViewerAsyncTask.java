@@ -21,7 +21,7 @@ import android.os.AsyncTask;
 
 import app.senvb.dartsviewer.DartsViewerActivity;
 
-public abstract class DartsViewerAsyncTask<Params, Result> extends AsyncTask<Params, String, Result> {
+abstract class DartsViewerAsyncTask<Params, Result> extends AsyncTask<Params, String, Result> {
 
     private DartsViewerActivity activity;
 

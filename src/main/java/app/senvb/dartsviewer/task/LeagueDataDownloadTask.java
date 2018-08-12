@@ -92,7 +92,7 @@ public class LeagueDataDownloadTask extends DartsViewerAsyncTask<LeagueMetaData,
         if (!now.after(seasonStartDate)) {
             Log.d(LOG_TAG, "Update needed because of it is before start of season");
             return true;
-        } else if (getDateDiff(now, lastModDate, TimeUnit.HOURS) > 6) {
+        } else if (getDateDiff(now, lastModDate) > 6) {
             Log.d(LOG_TAG, "Update needed because last update is more than 6 hours ago");
             return true;
         } else {
@@ -101,8 +101,8 @@ public class LeagueDataDownloadTask extends DartsViewerAsyncTask<LeagueMetaData,
         }
     }
 
-    private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
-        return timeUnit.convert(date2.getTime() - date1.getTime(), timeUnit);
+    private long getDateDiff(Date date1, Date date2) {
+        return TimeUnit.HOURS.convert(date2.getTime() - date1.getTime(), TimeUnit.HOURS);
     }
 
     protected void onPostExecute(LeagueData league) {
@@ -112,11 +112,9 @@ public class LeagueDataDownloadTask extends DartsViewerAsyncTask<LeagueMetaData,
 
     public void update(Step nextStep) {
         stepNumber++;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Lade: (").append(stepNumber);
-        sb.append("/").append(Step.getTotalNumberOfSteps()).append("): ");
-        sb.append(nextStep.getMessage());
-        publishProgress(sb.toString());
+        String sb = "Lade: (" + stepNumber + "/" + Step.NUMBER_STEPS + "): " + nextStep
+                .getMessage();
+        publishProgress(sb);
     }
 
     public interface LeagueDataDownloadHandler {

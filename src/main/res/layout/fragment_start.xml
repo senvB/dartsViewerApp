@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:text="DartsViewer"
-            android:textSize="32dp" />
+            android:textSize="32sp" />
 
         <ImageView
             android:id="@+id/logoView1"
