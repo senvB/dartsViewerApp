@@ -40,6 +40,7 @@ The library is released under the terms of the GNU Affero General Public License
 The app uses a DSAB data loader library which is also available on GitHub (https://github.com/senvB/dsabDataLoader)
 
 The code is built with Android Studio using Gradle. It may not be perfectly set up as I am quite new to Idea and Gradle (switching from Eclipse and Maven).
+In order to build the whole software the code for the app and the code for the data loader need to be imported as modules into a new project.
 
 #### Dependencies
 The code makes use of the following libraries.
