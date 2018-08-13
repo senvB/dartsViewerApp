@@ -1,19 +1,19 @@
 /**
- *  The DartsViewerApp allows to parse and display information for DSAB dart leagues.
- *  Copyright (C) 2017-2018  Sven Baselau
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as
- *  published by the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * The DartsViewerApp allows to parse and display information for DSAB dart leagues.
+ * Copyright (C) 2017-2018  Sven Baselau
+ * <p>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package app.senvb.dartsviewer;
 
@@ -41,7 +41,7 @@ class UpdateAvailableChecker {
             CheckNewVersionTask task = new CheckNewVersionTask();
             Optional<String> versionInfoString = task.execute().get();
             if (versionInfoString.isPresent()) {
-                String[]versionInfo = versionInfoString.get().split(SERVER_VERSION_SEPARATOR);
+                String[] versionInfo = versionInfoString.get().split(SERVER_VERSION_SEPARATOR);
                 int latestAvailableVersion = Integer.parseInt(versionInfo[0]);
                 int thisVersionCode = BuildConfig.VERSION_CODE;
                 if (latestAvailableVersion > thisVersionCode) {
@@ -52,13 +52,15 @@ class UpdateAvailableChecker {
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
                     }
-                    String msg = "Es steht ein neues Update der App zur Verfügung. Alte Version: " + thisVersionName + ", neue Version: " + versionInfo[1] + ". Herunterladen??";
+                    String msg = "Es steht ein neues Update der App zur Verfügung. Alte Version: " + thisVersionName + ", neue Version: "
+                            + versionInfo[1] + ". Im Falle von Darstellungsproblemen nach der Installation, bitte den Cache einmal löschen. Jetzt herunterladen??";
                     final String version = versionInfo[2];
                     new AlertDialog.Builder(dva)
                             .setTitle("Update verfügbar")
                             .setMessage(msg)
                             .setPositiveButton("Herunterladen", (dialog, which) -> download(version, dva))
-                            .setNegativeButton("Abbrechen", (dialog, which) -> {})
+                            .setNegativeButton("Abbrechen", (dialog, which) -> {
+                            })
                             .show();
                 }
             } else {

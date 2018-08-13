@@ -9,6 +9,8 @@ Usually the information about a certain league and their results require a coupl
 
 The *DartsViewerApp* provided here allows to load the data from the DSAB website and present it in a structured way. 
 
+The app supports the Android OS from API level 24 ("Nougat", Android version 7.x) onwards. 
+
 ## Features
 The *DartsViewerApp* offer a simple and structured way to access the results of the DSAB leagues. Additional features make the handling of the app even more convenient.
 
@@ -30,7 +32,31 @@ Several features are planned or at least thought of.
 ## Screenshots
 Some screenshots from the app in action.
 
-TODO
+#### Landing page
+<img src = "images/01_LandingPage.png" alt="Landing page" height="400"/>
+
+#### Region selection
+<img src = "images/04_RegionSelection.png" alt="Region selection" height="400"/>
+
+#### Season overview
+<img src = "images/07_BerlinSeasonOverview.png" alt="Season overview" height="400"/>
+
+#### League overview
+<img src = "images/08_BerlinLeagueOverview.png" alt="League overview" height="400"/>
+
+#### League details
+<img src = "images/10_LeagueOverviewFull.png" alt="League details" height="400"/>
+
+#### Team overview
+<img src = "images/18_TeamOverview1.png" alt="Team overview" height="400"/>
+
+#### Team address
+<img src = "images/21_TeamAddress.png" alt="Team address" height="400"/>
+
+#### Favorite overview
+<img src = "images/22_FavoriteOverview.png" alt="Favorite overview" height="400"/>
+
+A detailed workflow is explained in the wiki (see [Screenshots and workflow](https://github.com/senvB/dartsViewerApp/wiki/Screenshots-and-workflow)])
 
 ## App permissions
 The *DartsViewerApp* requires the following permissions to run properly:
