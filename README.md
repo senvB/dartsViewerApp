@@ -56,7 +56,7 @@ Some screenshots from the app in action.
 #### Favorite overview
 <img src = "images/22_FavoriteOverview.png" alt="Favorite overview" height="400"/>
 
-A detailed workflow is explained in the wiki (see [Screenshots and workflow(https://github.com/senvB/dartsViewerApp/wiki/Screenshots-and-workflow)])
+A detailed workflow is explained in the wiki (see [Screenshots and workflow](https://github.com/senvB/dartsViewerApp/wiki/Screenshots-and-workflow)])
 
 ## App permissions
 The *DartsViewerApp* requires the following permissions to run properly:
