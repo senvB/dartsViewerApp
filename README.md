@@ -33,29 +33,28 @@ Several features are planned or at least thought of.
 Some screenshots from the app in action.
 
 Landing page
-![Landing page](images/01_LandingPage.png)
+<img src = "images/01_LandingPage.png" alt="Landing page" height="200"/>
 
 Region selection
-![Region selection](images/04_RegionSelection.png)
+<img src = "images/04_RegionSelection.png" alt="Region selection" height="200"/>
 
 Season overview
-![Season overview](images/07_BerlinSeasonOverview.png)
+<img src = "images/07_BerlinSeasonOverview.png" alt="Season overview" height="200"/>
 
 League overview
-![League overview](images/08_BerlinLeagueOverview.png)
+<img src = "images/08_BerlinLeagueOverview.png" alt="League overview" height="200"/>
 
 League details
-![League details](images/10_LeagueOverviewFull.png)
+<img src = "images/10_LeagueOverviewFull.png" alt="League details" height="200"/>
 
 Team overview
-![Team overview](images/18_TeamOverview1.png)
+<img src = "images/18_TeamOverview1.png" alt="Team overview" height="200"/>
 
 Team address
-![Team address](images/21_TeamAddress.png)
+<img src = "images/21_TeamAddress.png" alt="Team address" height="200"/>
 
 Favorite overview
-![Favorite overview](images/22_FavoriteOverview.png)
-
+<img src = "images/22_FavoriteOverview.png" alt="Favorite overview" height="200"/>
 
 A detailed workflow is explained in the wiki (see [Screenshots and workflow(https://github.com/senvB/dartsViewerApp/wiki/Screenshots-and-workflow)])
 
