@@ -1,4 +1,4 @@
-# DartsViewerApp <img src="images/ic_launcher.png" width="48"/>
+# <img src="images/ic_launcher.png" width="56"/> DartsViewerApp
 
 ## Introduction
 The Android app to follow the results of the DSAB leagues.
