@@ -18,7 +18,24 @@
 package app.senvb.dartsviewer;
 
 import android.app.Application;
+import android.os.StrictMode;
 
 public class DartsViewerApplication extends Application {
+
+    @Override
+    public void onCreate() {
+        turnOnStrictMode();
+        super.onCreate();
+    }
+
+    private void turnOnStrictMode() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(
+                    new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+            StrictMode.setVmPolicy(
+                    new StrictMode.VmPolicy.Builder().detectAll()
+                            .penaltyLog().penaltyDeath().build());
+        }
+    }
 
 }

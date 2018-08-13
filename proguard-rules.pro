@@ -23,3 +23,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn com.itextpdf.**
+-dontwarn okio.**
+
+# Preserve annotations, line numbers, and source file names
+-keepattributes *Annotation*,SourceFile,LineNumberTable

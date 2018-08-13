@@ -80,8 +80,7 @@ public class LocationFromAddressTask extends DartsViewerAsyncTask<String, Option
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
 			String jsonAddress;
-			try {
-				InputStream stream = new BufferedInputStream(urlConnection.getInputStream());
+			try (InputStream stream = new BufferedInputStream(urlConnection.getInputStream())) {
 				jsonAddress = IOUtils.toString(stream, Charset.defaultCharset());
 			} finally {
 				urlConnection.disconnect();
