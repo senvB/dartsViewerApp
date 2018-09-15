@@ -101,7 +101,11 @@ public class TeamFragment extends Fragment {
         Optional<Team> t = leagueData.getTeamByNumber(b.getInt("teamID"));
         if (t.isPresent()) {
             team = t.get();
-            ((TextView) rootView.findViewById(R.id.teamTitle)).setText(team.getName());
+            String teamName = team.getName();
+            if (!team.offersFood()) {
+                teamName = teamName + " (kein Essen)";
+            }
+            ((TextView) rootView.findViewById(R.id.teamTitle)).setText(teamName);
             ((TextView) rootView.findViewById(R.id.teamVenue)).setText(team.getVenue());
             TextView address1 = rootView.findViewById(R.id.teamAddress1);
             TextView address2 = rootView.findViewById(R.id.teamAddress2);

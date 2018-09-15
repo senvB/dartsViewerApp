@@ -12,8 +12,8 @@ android {
         applicationId "app.senvb.dartsviewer"
         minSdkVersion 24
         targetSdkVersion 26
-        versionCode 13
-        versionName "0.13"
+        versionCode 14
+        versionName "0.14"
         manifestPlaceholders = [googleMapsApiKey:googleMapsApiKey]
     }
     buildTypes {
@@ -25,8 +25,9 @@ android {
         }
         debug {
             debuggable true
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
+            //useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
